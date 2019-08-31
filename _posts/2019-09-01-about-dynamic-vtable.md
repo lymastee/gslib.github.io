@@ -64,7 +64,7 @@ categories: gslib
         virtual void end_of_vtable() { __asm { nop } }
     };
     
-    class B:
+    class BA:
         public A
     {
     public:
@@ -75,7 +75,7 @@ categories: gslib
         }
     };
     
-这种情况，vtable_ops&lt;B&gt;::end_of_vtable()获取的尺寸认为B的虚表大小为1。但是执行B::func1的时候里面的__super::func1是相对跳转过去的，因此如果使用拷贝虚表的方法来创建per instance虚表，需要拷贝大小为2的虚表。实际情况远比这个例子复杂，如果一个类有复杂的继承关系，我们就必须借助一些工具来确定虚表的正确尺寸。这是不可取的。
+这种情况，vtable_ops&lt;BA&gt;::end_of_vtable()获取的尺寸认为B的虚表大小为1。但是执行B::func1的时候里面的__super::func1是相对跳转过去的，因此如果使用拷贝虚表的方法来创建per instance虚表，需要拷贝大小为2的虚表。实际情况远比这个例子复杂，如果一个类有复杂的继承关系，我们就必须借助一些工具来确定虚表的正确尺寸。这是不可取的。
 
 因此我们需要构建自己的jump table来跳转回原始vtable。具体实现参见[dvt.cpp](https://github.com/lymastee/gslib/blob/master/src/gslib/dvt.cpp)中的dvt_bridge_code::install。
 
