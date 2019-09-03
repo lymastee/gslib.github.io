@@ -2,6 +2,7 @@
 title: UI系统中的问题
 layout: post
 categories: todo
+tags: ''
 ---
 ## DWRITE的效率瓶颈
 
@@ -16,8 +17,8 @@ categories: todo
 5. 转为d3d texture的R8G8B8A8的straight格式
 
 万万没想到竟然是cpu bound，并且热点在CreateDxgiSurfaceRenderTarget上。
-![hotspot1](https://github.com/lymastee/lymastee.github.io/blob/master/resources/2019-09-03/HOTSPOT1.png)
-![hotspot2](https://github.com/lymastee/lymastee.github.io/blob/master/resources/2019-09-03/HOTSPOT2.png)
+![hotspot1](https://github.com/lymastee/lymastee.github.io/blob/master/resources/2019-09-03/HOTSPOT1.png?raw=true)
+![hotspot2](https://github.com/lymastee/lymastee.github.io/blob/master/resources/2019-09-03/HOTSPOT2.png?raw=true)
 
 所以之后这个batch需要做一些调整，要把所有绘制文字的操作batch到一起，这个CreateDxgiSurfaceRenderTarget尽可能少才行。
 
