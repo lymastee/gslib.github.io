@@ -11,5 +11,4 @@ gems:
   - jekyll-paginate
 markdown: kramdown
 baseurl: ''
-
 theme: jekyll-theme-modernist
