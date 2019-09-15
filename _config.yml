@@ -2,6 +2,7 @@
 title: 我TM吹爆
 author: lymastee
 description: ''
+show_downloads: false
 permalink: '/:year/:month/:day/:title/'
 paginate: 6
 paginate_path: '/page/:num/'
